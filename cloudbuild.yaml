@@ -1,0 +1,9 @@
+steps:
+  - name: node
+    entrypoint: /bin/bash
+    args: 
+      - -c
+      - |
+        npm install
+        npm test
+        npm run build
