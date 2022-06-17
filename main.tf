@@ -4,16 +4,18 @@ provider "google" {
 }
 
 resource "google_cloudbuild_trigger" "cloudbuild_trigger" {
-    trigger_template {
-        branch_name = "master"
-        repo_name = "terraform-gcb"
+    name = "cloudbuild-trigger"
+
+    source_to_build {
+        uri = "https://github.com/IDiot29/terraform-gcb"
+        ref       = "refs/heads/master"
+        repo_type = "GITHUB"
     }
 
-    build {
-        step {
-            name = "node"
-            entrypoint = "npm"
-            args = ["install"]
-        }
-    }
+    git_file_source {
+        path      = "cloudbuild.yaml"
+        uri = "https://github.com/IDiot29/terraform-gcb"
+        ref       = "refs/heads/master"
+        repo_type = "GITHUB"
+  }
 }
